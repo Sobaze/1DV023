@@ -1,0 +1,15 @@
+{
+  "name": "assignment-3",
+  "version": "1.0.0",
+  "description": "Assignment 3 for the course 1dv023",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.lnu.se:1dv023/student/jn223ck/assignment-3.git"
+  },
+  "author": "Jonas Nilsson",
+  "license": "MIT"
+}
