@@ -1,3 +1,29 @@
 <div class="titleAligned">
-    <h1>Gitlab Issues</h1>
+    <h2>Gitlab Issues</h2>
+    <p>here we have a list of issues collected.</p>
+
+    {{#if issues.length}}
+        {{#each issues}}
+
+        <div class="theIssue">
+            <div class="surround">
+                <div class="issueSquareContent">
+                    <span class="numberOfTheIssue"> {{this.issueNumber}}</span>
+                    <h5><a >  {{this.title}}</a></h5>
+                    <span class="theUser"> {{this.user}} </span>
+                    <hr>
+                    <p class="descriptForIssue">{{this.descriptIssue}}</p>
+                </div>
+                <div class="commentSektion">
+                    <span class="commentsOnIssue"> {{this.comments}} </span>
+                    <span class="stateOfIssue"> {{this.state}} </span>
+                <hr>
+                <br>
+                <span class="timeOfCreation"> {{this.createdAt}}, {{thi.time}} </span>
+                </div>
+
+            </div>
+        </div>
+        {{/each}}
+    {{/if}}
 </div>
