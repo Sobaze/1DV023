@@ -18,15 +18,6 @@ const port = 3000
 
 app.use(helmet())
 
-// app.use(helmet.contentSecurityPolicy({
-//   directives: {
-//     defaultSrc: ["'self'"],
-//     imgSrc: ["'self'", 'avatars3.githubusercontent.com'],
-//     styleSrc: ["'self'", "'unsafe-inline'", 'cdnjs.cloudflare.com'],
-//     scriptSrc: ["'self'", 'use.fontawesome.com', 'cdnjs.cloudflare.com'],
-//     blockAllMixedContent: true
-//   }
-// }))
 // Connection to webbsocket
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
