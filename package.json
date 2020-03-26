@@ -11,5 +11,12 @@
     "url": "git@gitlab.lnu.se:1dv023/student/jn223ck/assignment-3.git"
   },
   "author": "Jonas Nilsson",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-hbs": "^2.3.1",
+    "helmet": "^3.22.0",
+    "node-fetch": "^2.6.0"
+  }
 }
