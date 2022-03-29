@@ -8,18 +8,24 @@
         <div class="theIssue">
             <div class="surround">
                 <div class="issueSquareContent">
-                    <span class="numberOfTheIssue"> {{this.issueNumber}}</span>
-                    <h5><a >  {{this.title}}</a></h5>
-                    <span class="theUser"> {{this.user}} </span>
+                    <span class="numberOfTheIssue"> {{this.iid}}</span>
+                    <h5>Title:  {{this.title}} </h5>
+                    <span class="theUser"> User: {{this.author.name}} </span>
                     <hr>
-                    <p class="descriptForIssue">{{this.descriptIssue}}</p>
+                    <p class="descriptForIssue">Description: {{this.description}}</p>
                 </div>
                 <div class="commentSektion">
-                    <span class="commentsOnIssue"> {{this.comments}} </span>
-                    <span class="stateOfIssue"> {{this.state}} </span>
+                    {{!-- {{#if this.comments.length}}
+                        {{#each this.comments}} --}}
+                            <span class="commentsOnIssue">Comments: {{this.comments}} </span>
+                        {{!-- {{/each}}
+                    {{/if}} --}}
+                    <span class="stateOfIssue">State: {{this.state}} </span>
                 <hr>
                 <br>
-                <span class="timeOfCreation"> {{this.createdAt}}, {{thi.time}} </span>
+                <span class="timeOfCreation"> Created:  {{this.created_at}} </span>
+                <br>
+                <span class="timeOfUpdate"> Last Updated: {{this.updated_at}} </span>
                 </div>
 
             </div>
