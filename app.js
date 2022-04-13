@@ -14,19 +14,20 @@ const hbs = require('express-hbs')
 const path = require('path')
 
 const app = express()
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 app.use(helmet())
 
 // Connection to webbsocket
 
-const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+const server = require('http').createServer(app)
+const io = require('socket.io')(server)
 
 io.on('connection', (socket) => {
   console.log('Client ' + socket.id + 'has connected')
+  socket.on('disconnect', () => { console.log('User disconnected ' + socket.id) })
 })
-http.listen(port, () => console.log(`Ess applications listening on port ${port}!`))
+server.listen(PORT, () => console.log(`Ess applications listening on port ${PORT}!`))
 
 // Configure rendering and setup view engine
 app.engine('hbs', hbs.express4({
@@ -43,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // Routes
 app.use('/', require('./routes/homeRouter'))
+app.use('/hooks', require('./routes/webhookRouter'))
 
 // Handling Errors. 404 errors.
 app.use((req, res, next) => {

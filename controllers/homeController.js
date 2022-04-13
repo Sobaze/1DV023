@@ -18,16 +18,19 @@ const homeController = {}
  * @param {Function} next - Express next error.
  */
 homeController.index = async (req, res, next) => {
-  const data = await fetch('https://gitlab.lnu.se/api/v4/projects/941/issues', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'PRIVATE-TOKEN': process.env.PRIVATE_ACCESS_TOKEN
-    }
-  })
-  const issues = await data.json()
-  console.log(issues)
-  res.render('home/index', { issues })
+  try {
+    const data = await fetch('https://gitlab.lnu.se/api/v4/projects/941/issues', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'PRIVATE-TOKEN': process.env.PRIVATE_ACCESS_TOKEN
+      }
+    })
+    const issues = await data.json()
+    res.render('home/index', { issues })
+  } catch (error) {
+    next(error)
+  }
 }
 
 // Exports.

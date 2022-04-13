@@ -7,19 +7,15 @@
 
         <div class="theIssue">
             <div class="surround">
+                <img src={{this.author.avatar_url}} alt='Gitlab users profile picture'> 
                 <div class="issueSquareContent">
-                    <span class="numberOfTheIssue"> {{this.iid}}</span>
+                    <span class="numberOfTheIssue">Issue: {{this.iid}}</span>
                     <h5>Title:  {{this.title}} </h5>
                     <span class="theUser"> User: {{this.author.name}} </span>
                     <hr>
                     <p class="descriptForIssue">Description: {{this.description}}</p>
                 </div>
-                <div class="commentSektion">
-                    {{!-- {{#if this.comments.length}}
-                        {{#each this.comments}} --}}
-                            <span class="commentsOnIssue">Comments: {{this.comments}} </span>
-                        {{!-- {{/each}}
-                    {{/if}} --}}
+                <div class="statesection">
                     <span class="stateOfIssue">State: {{this.state}} </span>
                 <hr>
                 <br>
