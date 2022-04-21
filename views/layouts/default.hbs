@@ -5,7 +5,7 @@
         <base href="{{baseURL}}" />
         <title>Gitlab Issues</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link href="/css/styles.css" rel="stylesheet">
+        <link href="./issues-app/css/styles.css" rel="stylesheet">
     </head>
 
     <body>
@@ -17,11 +17,8 @@
         {{>footer}}
 
 
-    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script> --}}
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="emithandler.js"></script>
-    <script>
-     var socket = io();
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script type="module" src="./js/emithandler.js"></script>
+    <script src="./issues-app/socket.io/socket.io.js"></script>
     </body>
 </html>

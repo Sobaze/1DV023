@@ -6,22 +6,38 @@
  */
 'use strict'
 
-require('dotenv').config()
-
-const express = require('express')
-const helmet = require('helmet')
-const hbs = require('express-hbs')
-const path = require('path')
+// const express = require('express')
+// const helmet = require('helmet')
+// const hbs = require('express-hbs')
+// const path = require('path')
+// require('dotenv').config()
+import express from 'express'
+import helmet from 'helmet'
+import hbs from 'express-hbs'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
+import dotenv from 'dotenv'
+import http from 'http'
+import { Server } from 'socket.io'
+import { router } from './routes/router.js'
+dotenv.config()
 
 const app = express()
 const PORT = process.env.PORT || 3000
+const baseURL = process.env.BASE_URL || '/'
 
 app.use(helmet())
 
 // Connection to webbsocket
 
-const server = require('http').createServer(app)
-const io = require('socket.io')(server)
+// const server = require('http').createServer(app)
+// const io = require('socket.io')(server)
+const server = http.createServer(app)
+const io = new Server()
+const __filename = fileURLToPath(import.meta.url)
+const directoryName = dirname(__filename)
+
+app.set('io', io)
 
 io.on('connection', (socket) => {
   console.log('Client ' + socket.id + 'has connected')
@@ -31,25 +47,32 @@ server.listen(PORT, () => console.log(`Ess applications listening on port ${PORT
 
 // Configure rendering and setup view engine
 app.engine('hbs', hbs.express4({
-  defaultLayout: path.join(__dirname, 'views', 'layouts', 'default'),
-  partialsDir: path.join(__dirname, 'views', 'partials')
+  defaultLayout: join(directoryName, 'views', 'layouts', 'default'),
+  partialsDir: join(directoryName, 'views', 'partials')
 }))
 
 // View engines
 app.set('view engine', 'hbs')
-app.set('views', path.join(__dirname, 'views'))
+app.set('views', join(directoryName, 'views'))
 
 // The static files to be served
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(join(directoryName, '..', 'public')))
+
+app.use((req, res, next) => {
+  res.locals.baseURL = baseURL
+  res.io = io
+  next()
+})
 
 // Routes
-app.use('/', require('./routes/homeRouter'))
-app.use('/hooks', require('./routes/webhookRouter'))
+app.use('/', router)
+// app.use('/', require('./routes/homeRouter'))
+// app.use('/', require('./routes/webhookRouter'))
 
 // Handling Errors. 404 errors.
 app.use((req, res, next) => {
   res.status(404)
-  res.sendFile(path.join(__dirname, 'public', '404.html'))
+  res.sendFile(path.join(directoryName, 'public', '404.html'))
 })
 
 // 403 forbidden errors or 500 errors.
@@ -57,7 +80,7 @@ app.use((err, req, res, next) => {
   if (err.message === '403') {
     return res
       .status(403)
-      .sendFile(path.join(__dirname, 'public', '403.html'))
+      .sendFile(path.join(directoryName, 'public', '403.html'))
   } else {
     res.status(err.status || 500)
     res.send(err.message || 'Internal Server Error')

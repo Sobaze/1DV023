@@ -6,13 +6,12 @@
  */
 'use strict'
 
-const express = require('express')
-const router = express.Router()
+import express from 'express'
+import { WebhookController } from '../controllers/webhookController.js'
 
-const controller = require('../controllers/webhookController')
+export const router = express.Router()
+
+const controller = new WebhookController()
 
 // POST
 router.post('/', controller.index)
-
-// Exports.
-module.exports = router

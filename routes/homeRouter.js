@@ -6,13 +6,16 @@
  */
 'use strict'
 
-const express = require('express')
-const router = express.Router()
+// const express = require('express')
+import express from 'express'
+import { HomeController } from '../controllers/homeController.js'
 
-const controller = require('../controllers/homeController')
+export const router = express.Router()
+
+const controller = new HomeController()
 
 // GET
 router.get('/', controller.index)
 
 // Exports.
-module.exports = router
+// module.exports = router
