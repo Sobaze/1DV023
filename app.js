@@ -5,11 +5,6 @@
  * @version 1.0.0
  */
 
-// const express = require('express')
-// const helmet = require('helmet')
-// const hbs = require('express-hbs')
-// const path = require('path')
-// require('dotenv').config()
 import express from 'express'
 import helmet from 'helmet'
 import hbs from 'express-hbs'
@@ -33,8 +28,7 @@ app.use(helmet())
 app.use(express.urlencoded({ extended: false}))
 
 app.use(express.json())
-// const server = require('http').createServer(app)
-// const io = require('socket.io')(server)
+
 const __filename = fileURLToPath(import.meta.url)
 const directoryName = dirname(__filename)
 
@@ -53,7 +47,6 @@ app.set('views', join(directoryName, 'views'))
 // The static files to be served
 app.use(express.static(join(directoryName, '/public')))
 
-// app.set('io', io)
 // Connection to webbsocket
 const server = http.createServer(app)
 const io = new Server(server)

@@ -6,7 +6,6 @@
  */
 'use strict'
 
-// const express = require('express')
 import express from 'express'
 import { HomeController } from '../controllers/homeController.js'
 
@@ -16,6 +15,3 @@ const controller = new HomeController()
 
 // GET
 router.get('/', controller.index)
-
-// Exports.
-// module.exports = router

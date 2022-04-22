@@ -6,10 +6,6 @@
  */
 'use strict'
 
-// const express = require('express')
-// const router = express.Router()
-// const homeRouter = require('./homeRouter')
-// const webhookRouter = require('./webhookRouter')
 import express from 'express'
 import { router as homeRouter } from './homeRouter.js'
 import { router as webhookRouter } from './webhookRouter.js'

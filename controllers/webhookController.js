@@ -14,10 +14,9 @@ export class WebhookController {
    * @param {Function} next - Express middleware function /error handling.
    */
   async index (req, res, next) {
-    console.log(req.body.user)
-    let prappa = null
+    let issueData = null
     if (req.body.event_type === 'issue') {
-      prappa = {
+      issueData = {
         description: req.body.object_attributes.description,
         iid: req.body.object_attributes.iid,
         issueURL: req.body.object_attributes.url,
@@ -27,14 +26,9 @@ export class WebhookController {
         avatarUrl: req.body.user.avatar_url
       }
     }
-    if (prappa) {
-      console.log(prappa)
-      res.io.emit('issue', prappa)
+    if (issueData) {
+      res.io.emit('issue', issueData)
     }
-    // req.body = {
-    //   description: req.body.object_attribues,
-    //   done: false
-    // }
     next()
   }
 
