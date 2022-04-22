@@ -4,31 +4,45 @@
  * @author Jonas Nilsson
  * @version 1.0.0
  */
-'use strict'
 
 export class WebhookController {
   /**
-   * Renders a view to the Home page. Where we fetch open and closed issues from out gitlab repo.
+   * To set up our webhook.
    *
    * @param {object} req - Express a request object.
    * @param {object} res - Express a response object.
    * @param {Function} next - Express middleware function /error handling.
    */
-  index (req, res, next) {
-    try {
-      // const io = req.app.get('socketio')
-      if (req.headers['x-gitlab-token'] !== process.env.X_GITLAB_TOKEN) {
-        res.status(403).send('This is not the correct secret!')
-      } else {
-        console.log(req.body)
-        const dataToEmit = {
-          action: req.body
-        }
-        res.io.emit('issue', dataToEmit)
-        res.status(200).send('Hook accepted')
+  async index (req, res, next) {
+    console.log(req.body.user)
+    let prappa = null
+    if (req.body.event_type === 'issue') {
+      prappa = {
+        description: req.body.object_attributes.description,
+        iid: req.body.object_attributes.iid,
+        issueURL: req.body.object_attributes.url,
+        title: req.body.object_attributes.title,
+        state: req.body.object_attributes.state,
+        user: req.body.user.name,
+        avatarUrl: req.body.user.avatar_url
       }
-    } catch (error) {
-      next(error)
     }
+    if (prappa) {
+      console.log(prappa)
+      res.io.emit('issue', prappa)
+    }
+    // req.body = {
+    //   description: req.body.object_attribues,
+    //   done: false
+    // }
+    next()
+  }
+
+  authorize (req, res, next) {
+    if (req.headers['x-gitlab-token'] !== process.env.X_GITLAB_TOKEN) {
+      res.status(403).send('This is not the correct secret!')
+      return
+    }
+    next()
   }
 }

@@ -3,11 +3,31 @@
     <p>here we have a list of issues collected.</p>
 
     {{#if issues.length}}
+            <div class="surround">
         {{#each issues}}
 
         <div class="theIssue">
-            <div class="surround">
                 <img src={{this.author.avatar_url}} alt='Gitlab users profile picture'> 
+                <div class="issueSquareContent">
+                    <span issue-id="<%= this.iid %>" class="numberOfTheIssue">Issue: {{this.iid}}</span>
+                    <h5>Title:  {{this.title}} </h5>
+                    <span class="theUser"> User: {{this.author.name}} </span>
+                    <hr>
+                    <p class="descriptForIssue">Description: {{this.description}}</p>
+                </div>
+                <div class="statesection">
+                    <span class="stateOfIssue">State: {{this.state}} </span>
+                
+            </div>
+
+        </div>
+        {{/each}}
+            </div>
+    {{/if}}
+</div>
+
+<template id="issue-template">
+     <img src={{this.author.avatar_url}} alt='Gitlab users profile picture'> 
                 <div class="issueSquareContent">
                     <span class="numberOfTheIssue">Issue: {{this.iid}}</span>
                     <h5>Title:  {{this.title}} </h5>
@@ -23,9 +43,4 @@
                 <br>
                 <span class="timeOfUpdate"> Last Updated: {{this.updated_at}} </span>
                 </div>
-
-            </div>
-        </div>
-        {{/each}}
-    {{/if}}
-</div>
+</template>

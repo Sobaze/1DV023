@@ -8,10 +8,12 @@
 
 import express from 'express'
 import { WebhookController } from '../controllers/webhookController.js'
+import { IssueController } from '../controllers/issueController.js'
 
 export const router = express.Router()
 
 const controller = new WebhookController()
+const issueController = new IssueController()
 
 // POST
-router.post('/', controller.index)
+router.post('/issue', controller.authorize, controller.index, issueController.createNewIssue)
