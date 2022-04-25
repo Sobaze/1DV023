@@ -22,7 +22,7 @@ if (issueTemplate) {
 const emithandler = (arg) => {
   const existingIssues = document.querySelector('.surround')
 
-  if (existingIssues.querySelector(`[issue-id="${arg.iid}"]`)) {
+  if (!existingIssues.querySelector(`[issue-id="${arg.iid}"]`)) {
     const issueNode = issueTemplate.content.cloneNode(true)
 
     const title = issueNode.querySelector('h5')
