@@ -39,4 +39,10 @@ export class WebhookController {
     }
     next()
   }
+
+  acceptHook (req, res, next) {
+    if (req.headers['x-gitlab-event']) {
+      res.status(200).send('Hook accepted')
+    }
+  }
 }

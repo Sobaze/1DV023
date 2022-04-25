@@ -9,10 +9,10 @@
 const issueTemplate = document.querySelector('#issue-template')
 if (issueTemplate) {
   // server socket
-  // const socket = window.io('https://cscloud9-32.lnu.se/', { path: '/issues-app/socket.io' })
+  const socket = window.io('https://cscloud9-32.lnu.se/', { path: '/issues-app/socket.io' })
 
   // ngrok socket for testing locally
-  const socket = window.io('https://e7f9-194-47-188-32.ngrok.io/', { path: '/socket.io' })
+  // const socket = window.io('https://e7f9-194-47-188-32.ngrok.io/', { path: '/socket.io' })
 
   socket.on('issue', arg => {
     emithandler(arg)

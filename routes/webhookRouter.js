@@ -14,4 +14,4 @@ export const router = express.Router()
 const controller = new WebhookController()
 
 // POST
-router.post('/issue', controller.authorize, controller.index)
+router.post('/issue', controller.authorize, controller.index, controller.acceptHook)
