@@ -83,4 +83,4 @@ app.use((err, req, res, next) => {
   }
 })
 
-server.listen(PORT, () => console.log(`Ess applications listening on port ${PORT}!`))
+server.listen(PORT, () => console.log(`The application is listening on port ${PORT}!`))
