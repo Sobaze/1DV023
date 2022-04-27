@@ -7,16 +7,16 @@
 
 const issueTemplate = document.querySelector('#issue-template')
 // server socket
-// const socket = window.io('https://cscloud9-32.lnu.se/', { path: '/issues-app/socket.io' })
+const socket = window.io('https://cscloud9-32.lnu.se/', { path: '/issues-app/socket.io' })
 
 // ngrok socket for testing locally
-const socket = window.io('https://fac8-2001-2043-1e03-4e00-51df-933e-fba8-3a1d.ngrok.io', { path: '/socket.io' })
+// const socket = window.io('https://fac8-2001-2043-1e03-4e00-51df-933e-fba8-3a1d.ngrok.io', { path: '/socket.io' })
 if (issueTemplate) {
   socket.on('issue', arg => {
     emithandler(arg)
   })
 }
-
+// Issue emithandler, that will create or update issues on our sire
 const emithandler = (arg) => {
   const existingIssues = document.querySelector('.surround')
 
