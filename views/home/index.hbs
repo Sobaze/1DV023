@@ -5,13 +5,15 @@
     <div class="surround">
     {{#if issues.length}}
         {{#each issues}}
-                <div class="issueSquareContent">
+                <div issue-id={{this.iid}} class="issueSquareContent">
                 <img src={{this.author.avatar_url}} alt='Gitlab users profile picture'> 
-                    <p issue-id={{this.iid}} class="numberOfTheIssue">Issue: {{this.iid}}</p>
-                    <h5>Title:  {{this.title}} </h5>
+                    <p  class="numberOfTheIssue">Issue: {{this.iid}}</p>
+                    <h5>Title: {{this.title}} </h5>
                     <span class="theUser"> User: {{this.author.name}} </span>
                     <p class="descriptForIssue">Description: {{this.description}}</p>
-                    <span class="stateOfIssue">State: {{this.state}} </span>
+                    <p class="stateOfIssue" value={{this.state}}>State: {{this.state}} </p>
+                    <button id="open" value={{this.iid}} class="openButton" >Open issue</button>
+                    <button id="close" value={{this.iid}} class="closeButton">Close issue</button>
                 </div>
         {{/each}}
     {{/if}}
@@ -21,10 +23,12 @@
 <template id="issue-template">
     <div class="issueSquareContent">
         <img  alt='Gitlab users profile picture'> 
-        <span class="numberOfTheIssue"></span>
+        <p class="numberOfTheIssue"></p>
         <h5> </h5>
         <span class="theUser"> </span>
         <p class="descriptForIssue"></p>
-        <span class="stateOfIssue"> </span>
+        <p class="stateOfIssue"> </p>
+        <button id="open" class="openButton"> Open button</button>
+        <button id="close" class="closeButton">Close button </button>
     </div>
 </template>

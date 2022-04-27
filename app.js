@@ -17,6 +17,7 @@ dotenv.config()
 
 import http from 'http'
 import { Server } from 'socket.io'
+import { closeIssues, openIssues } from './public/js/issuesState.js'
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -52,8 +53,15 @@ const server = http.createServer(app)
 const io = new Server(server)
 
 io.on('connection', (socket) => {
-  console.log('Client ' + socket.id + 'has connected')
-  socket.on('disconnect', () => { console.log('User disconnected ' + socket.id) })
+    console.log('Client ' + socket.id + 'has connected')
+  socket.on('disconnect', () => { 
+    console.log('User disconnected ' + socket.id) })
+    socket.on('open', (arg) => {
+      openIssues(arg)
+    } )
+    socket.on('close', (arg) => {
+      closeIssues(arg)
+    } )
 })
 
 app.use((req, res, next) => {

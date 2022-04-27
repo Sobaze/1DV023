@@ -32,6 +32,7 @@ export class WebhookController {
     next()
   }
 
+  // Authorizes our connection to the gitlab repo.
   authorize (req, res, next) {
     if (req.headers['x-gitlab-token'] !== process.env.X_GITLAB_TOKEN) {
       res.status(403).send('This is not the correct secret!')
@@ -40,6 +41,7 @@ export class WebhookController {
     next()
   }
 
+  // Accept the hook call and returns a 200 if the hook is recieved
   acceptHook (req, res, next) {
     if (req.headers['x-gitlab-event']) {
       res.status(200).send('Hook accepted')
